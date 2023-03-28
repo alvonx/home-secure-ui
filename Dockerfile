@@ -1,23 +1,30 @@
-# set the base image
-FROM python:3.9
+# base image
+FROM python:3.9.7-buster
 
-# File Author / Maintainer
-MAINTAINER Esther
+# options
+ENV PYTHONUNBUFFERED 1
 
-#add project files to the usr/src/app folder
-ADD . /usr/src/app
+# Set working directory
+RUN mkdir secure_home
+# set the working directory
+COPY . /secure_home/
+# coppy commands
+WORKDIR /secure_home
 
-#set directoty where CMD will execute
-WORKDIR /usr/src/app
+# update docker-iamage packages
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y netcat-openbsd gcc && \
+    apt-get clean
 
-COPY requirements.txt ./
-
-# Get pip to download and install requirements:
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose ports
-EXPOSE 8000
-
-# default command to execute
-CMD exec gunicorn secure_home.wsgi:application --bind 0.0.0.0:8000 --workers 3
-#CMD ["python", "manage.py", "runserver"]
+# update pip
+RUN pip install --upgrade pip
+# install psycopg for connect to pgsql
+RUN pip install psycopg2-binary
+# install python packages
+RUN pip install -r requirements.txt
+# create static directory
+RUN mkdir static
+# RUN python manage.py collectstatic --no-input
+EXPOSE 5000
+CMD ["gunicorn","--bind", ":5000", "secure_home.wsgi:application"]

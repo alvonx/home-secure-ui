@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="88021deb-97f1-4d6a-b792-ce47978a9dd9" name="Changes" comment="secure_home" />
+    <list default="true" id="88021deb-97f1-4d6a-b792-ce47978a9dd9" name="Changes" comment="allowed host 49.205.182.167">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/secure_home/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/secure_home/settings.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -48,12 +51,20 @@
       <option name="project" value="LOCAL" />
       <updated>1679995230464</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="allowed host 49.205.182.167">
+      <created>1679995366147</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1679995366147</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="comm" />
     <MESSAGE value="secure_home" />
-    <option name="LAST_COMMIT_MESSAGE" value="secure_home" />
+    <MESSAGE value="allowed host 49.205.182.167" />
+    <option name="LAST_COMMIT_MESSAGE" value="allowed host 49.205.182.167" />
   </component>
 </project>
