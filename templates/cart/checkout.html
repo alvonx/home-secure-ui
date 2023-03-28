@@ -1,0 +1,189 @@
+<!-- Extending The Base Template -->
+{% extends 'base.html' %}
+
+{% load static %}
+
+<!-- Block Content Starts Here -->
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url({% static 'images/bg_3.jpg' %});" data-stellar-background-ratio="0.5">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+      <div class="col-md-9 ftco-animate pb-5">
+        <h1 class="mb-3 bread">Checkout Page</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Checkout Section Starts Here -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card p-4">
+                <h4 class="mb-3">Billing address</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">First name</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Last name</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Email</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Phone Number</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="firstName">Address Line 1</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="lastName">Address Line 2</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="firstName">City</label>
+                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="lastName">State</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid last name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="lastName">Country</label>
+                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                            <div class="invalid-feedback">
+                            Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+                        <label for="floatingTextarea">Order Note</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+            <div class="p-3 text-center table-responsive">
+              <table class="table table-hover">
+                <thead class="text-muted">
+                  <tr class="small text-uppercase">
+                    <th scope="col">Product</th>
+                    <th scope="col" width="120">Quantity</th>
+                    <th scope="col" width="120">Price</th>
+                    <th scope="col" class="text-right" width="200">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for cart_item in cart_items %}
+                  <tr>
+                    <td>
+                      <figure class="itemside align-items-center">
+                        <div class="aside">
+                          <img style="width:100px" class="rounded-circle" src="{{ cart_item.product.images.url }}" class="img-sm" />
+                        </div>
+                        <figcaption class="text-center">
+                          <a href="{{ cart_item.product.get_url }}" class="title text-decoration-none"
+                            >{{ cart_item.product.product_name }}</a
+                          >
+                          <p class="text-muted small">
+                            Matrix: 25 Mpx <br />
+                            Brand: Canon
+                          </p>
+                        </figcaption>
+                      </figure>
+                    </td>
+                    <td>
+                      <!-- col.// -->
+                      <div class="col">
+                        <div>
+                          <div>
+                            <a
+                              href="{% url 'remove_cart' cart_item.product_id %}"
+                              class="btn btn-outline-danger"
+                              type="button"
+                              id="button-plus"
+                            >
+                              <i class="fa fa-minus"></i>
+                            </a>
+                          </div>
+                          <input type="text" class="form-control fw-bold text-center m-2" value="{{ cart_item.quantity }}" />
+                          <div class="input-group-append">
+                            <a href="{% url 'add_cart' cart_item.product.id %}"
+                              class="btn btn-outline-success"
+                              type="button"
+                              id="button-minus"
+                            >
+                              <i class="fa fa-plus"></i>
+                            </a>
+                          </div>
+                        </div>
+                        <!-- input-group.// -->
+                      </div>
+                      <!-- col.// -->
+                    </td>
+                    <td>
+                      <div class="price-wrap">
+                        <div class="price">{{ cart_item.sub_total }} Rs /-</div>
+                        <small class="text-muted"> {{ cart_item.product.price }} Rs /- Each </small>
+                      </div>
+                      <!-- price-wrap .// -->
+                    </td>
+                    <td class="text-right">
+                      <a href="{% url 'remove_cart_item' cart_item.product.id %}" class="btn btn-danger"><i class="fa-solid fa-trash"></i></a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            </div>
+        </div>
+            
+    </div>
+</div>
+<!-- Checkout Section Ends Here -->
+
+
+{% endblock content %}
+<!-- Block Content Ends Here -->

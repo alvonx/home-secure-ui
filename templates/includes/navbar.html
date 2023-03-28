@@ -1,0 +1,107 @@
+<!-- Navbar Content Starts Here -->
+<nav
+  class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
+  id="ftco-navbar"
+>
+  <div class="container">
+    <a class="navbar-brand" href="{% url 'home' %}"
+      >Home<span> Security</span></a
+    >
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#ftco-nav"
+      aria-controls="ftco-nav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="oi oi-menu"></span> Menu
+    </button>
+
+    <div class="collapse navbar-collapse" id="ftco-nav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a href="{% url 'home' %}" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'about' %}" class="nav-link">About</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Categories
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {% if links %} {% for link in links %}
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'products_by_category' link.slug %}"
+                >{{link.category_name}}</a
+              >
+            </li>
+            {% endfor %} {% else %} No Categories {% endif %}
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="{% url 'store' %}" class="nav-link">Products</a>
+        </li>
+        <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+        {% if user.id is not None %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            {{user.first_name | title}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Accounts
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'register' %}">Register</a>
+            </li>
+          </ul>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a href="{% url 'cart' %}" type="button" class="btn btn-primary">
+            Cart <span class="badge bg-danger">{{cart_count}}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar Content Ends Here -->

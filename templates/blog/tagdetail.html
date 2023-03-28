@@ -1,0 +1,57 @@
+<!-- Extending The Base Template -->
+{% extends 'base.html' %}
+
+<!-- Loading The Static Content -->
+{% load static %}
+
+<!-- Block Content Starts Here -->
+{% block content %}
+
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url({% static 'images/5.jpg' %});" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+        <div class="col-md-9 ftco-animate pb-5">
+          <h1 class="mb-3 bread">Blogs</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- All Post Content Starts Here -->
+<section class="ftco-section">
+    <div class="container">
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-7 heading-section text-center ftco-animate">
+          <span class="subheading">{{ tag.title }}</span>
+        <h2>All Blog Posts</h2>
+      </div>
+    </div>
+    <div class="row d-flex">
+        {% for post in tag.posts.all %}
+      <div class="col-md-4 d-flex ftco-animate">
+          <div class="blog-entry justify-content-end">
+          <a class="block-20" style="background-image: url('{{post.image.url}}');">
+          </a>
+          <div class="text pt-4">
+              <div class="meta mb-3">
+              <div><a>{{post.date_pub}}</a></div>
+              
+              {% for tag in post.tags.all %}
+              <div><a href="{{ tag.get_absolute_url}}">{{tag}}</a></div>
+              {% endfor %}
+              {% comment %} <div><a href="#" class="meta-chat"><span class="icon-chat"></span> 3</a></div> {% endcomment %}
+            </div>
+            <h3 class="heading mt-2"><a>{{post.title}}</a></h3>
+            <p><a href="{{ post.get_absolute_url }}" class="btn btn-primary">Read more</a></p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+    </section>
+<!-- All Post Content Ends Here -->
+
+{% endblock content %}
+<!-- Block Content Ends Here -->
