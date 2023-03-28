@@ -24,7 +24,6 @@ RUN pip install psycopg2-binary
 # install python packages
 RUN pip install -r requirements.txt
 # create static directory
-RUN mkdir static
 # RUN python manage.py collectstatic --no-input
 EXPOSE 5000
 CMD ["gunicorn","--bind", ":5000", "secure_home.wsgi:application"]
